@@ -6,3 +6,74 @@ output: github_document
 
 This is my solution to HW1 
 
+
+## Preparation: 
+
+##### Load the package 'tidyverse'
+```{r access library, message = FALSE}
+library(tidyverse)
+```
+
+
+## Problem 1
+
+##### a)  Create a data frame with the specified elements
+
+```{r prob1_df: create df, collapse = TRUE}
+# Create and define the data frame
+prob1_df = 
+  tibble(
+    samp = rnorm(n = 10),
+    samp_gt_0 = samp > 0,
+    char_vec = c("a", "b", "c", "d", "e", "f", "g", "h","i","j" ),
+    factor_vec = factor(c("low", "low", "low", "mod", "mod", "mod", "mod", "high", "high", "high"))
+)
+# Take a look at 'prob1_df' 
+prob1_df
+```
+
+
+##### b)  Take the mean of each variable in the data frame
+
+```{r prob1_df: mean_pull_var, message = FALSE, collapse = TRUE}
+# pull out the variables and take the mean for each of them
+
+mean(pull(prob1_df, samp))        # mean of the numeric 
+
+mean(pull(prob1_df, samp_gt_0))   # mean of the logical 
+
+mean(pull(prob1_df, char_vec))    # mean of the character 
+
+mean(pull(prob1_df, factor_vec))  # mean of the factor
+```
+
+I can take the mean of numbers and logical but not character or factor variables.
+
+
+##### c)  Convert the logical, character, and factor variables into numeric variable
+
+```{r prob1_df: try_num, eval=FALSE}
+# Apply the as.numeric function
+
+as.numeric(pull(prob1_df, samp))
+as.numeric(pull(prob1_df, samp_gt_0))
+as.numeric(pull(prob1_df, char_vec))
+as.numeric(pull(prob1_df, factor_vec))
+```
+
+
+##### d)  Convert the logical vector to numeric, factor, and multiply the random sample by the result
+
+```{r prob1_df: multiply, collapse = TRUE}
+# logical -> numeric, and multiply the random sample
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+
+# logical -> factor, and multiply the random sample
+as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+
+# logical -> factor -> numeric, and multiply the random samp 
+as.numeric(as.factor(pull(prob1_df, factor_vec))) * pull(prob1_df, samp)
+```
+
+# Problem 2
+
