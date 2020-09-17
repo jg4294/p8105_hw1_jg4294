@@ -4,14 +4,14 @@ author: JingYao Geng
 output: github_document
 ---
 
-This is my solution to HW1 
+> This is my solution to HW1
 
-
-## Preparation: 
 
 ##### Load the package 'tidyverse'
-```{r access library, message = FALSE}
+
+```{r access_lib, message = FALSE}
 library(tidyverse)
+
 ```
 
 
@@ -75,5 +75,37 @@ as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 as.numeric(as.factor(pull(prob1_df, factor_vec))) * pull(prob1_df, samp)
 ```
 
-# Problem 2
+## Problem 2
 
+#####  a) Load the dataset: _'penguins'_
+
+```{r penguins_ds, collapse = TRUE}
+data("penguins", package = "palmerpenguins")
+print(penguins) # take a look at the dataset
+
+```
+
+
+* There are **`r ncol(penguins)`** variables in the **penguins** dataset, they are: "`r names(penguins)`" 
+* Among all the variables, 
+  * **3** of them are factor: species, island, and sex.
+  * **2** of them are doubles: bill length and bill depth.
+  * **3** of them are integer: flipper length and body mass.
+
+
+* The dataset **penguins** has **`r nrow(penguins)`** rows and  **`r ncol(penguins)`** columns. 
+
+* The mean of **flipper length** is  `r summary(penguins$flipper_length_mm)[4]` .
+
+
+##### b) Scatterplot of flipper_length(y) vs. bill_length_mm(x)
+
+```{r plot, message = FALSE}
+plot_fb = tibble(
+  x = penguins$bill_length_mm,
+  y = penguins$flipper_length_mm
+)
+
+ggplot(plot_fb, aes(x = x, y = y)) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+```
