@@ -74,14 +74,16 @@ as.numeric(as.factor(pull(prob1_df, factor_vec))) * pull(prob1_df, samp)
 
 ## Problem 2
 
-#####  a) Load the dataset: _'penguins'_
+#####  a) Description of the dataset: _'penguins'_
 
 ```{r penguins_ds, collapse = TRUE}
 data("penguins", package = "palmerpenguins")
+# summary statistics
+summary(penguins) 
 
 ```
 
-A short description of penguins:
+**A short description of penguins:**
 
 There are **`r ncol(penguins)`** variables in the **penguins** dataset, they are: "`r names(penguins)`" .
 
@@ -93,13 +95,12 @@ Among all the variables,
   * The levels of sex are: `r levels(pull(penguins,sex))`. 
   
 * **2** of them are doubles: bill length and bill depth.
-  * The range of bill length is `r range(pull(penguins, bill_length_mm),na.rm=T)`mm. 
-
-  * The range of bill depth is `r range(pull(penguins, bill_depth_mm),na.rm=T)`mm.
+  * The max and min values of bill length are `r range(pull(penguins, bill_length_mm),na.rm=T)` mm. 
+  * The max and min values of bill depth are `r range(pull(penguins, bill_depth_mm),na.rm=T)` mm.
   
 * **3** of them are integer: flipper length, body mass, and year.
-  * The range of flipper length is `r range(pull(penguins, flipper_length_mm),na.rm=T)`mm.
-  * The range of body mass is `r range(pull(penguins,     body_mass_g),na.rm=T)`g. 
+  * The max and min values of flipper length are `r range(pull(penguins, flipper_length_mm),na.rm=T)` mm.
+  * The max and min values of body mass are `r range(pull(penguins,     body_mass_g),na.rm=T)` g. 
 
 
 The dataset **penguins** has **`r nrow(penguins)`** rows and  **`r ncol(penguins)`** columns. 
@@ -107,7 +108,7 @@ The dataset **penguins** has **`r nrow(penguins)`** rows and  **`r ncol(penguins
 The mean of **flipper length** is  **`r summary(penguins$flipper_length_mm)[4]`** .
 
 
-##### b) Scatterplot of flipper_length(y) vs. bill_length_mm(x)
+##### b) Scatterplot of flipper_length vs. bill_length
 
 ```{r plot, message = FALSE, collapse = TRUE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
